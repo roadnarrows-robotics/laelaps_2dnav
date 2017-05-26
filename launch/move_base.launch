@@ -1,8 +1,14 @@
 <launch>
 
+  <!-- Run Geofrenzy node -->
+  <node name="gf_node" pkg="geofrenzy" type="gf_node" args="168" />
   <!-- Run the map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find simple_map)/maps/rectangle_map.yaml">
+  <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find simple_map)/maps/low_res_fig_8.yaml">
     <param name="frame_id" value="/odom"/>
+  </node>-->
+  <node name="gf_map_server" pkg="geofrenzy" type="gf_map_server" args="168">
+    <remap from="/geofrenzy/168/map" to="/map"/>
+    <remap from="/geofrenzy/168/map_metadata" to="/map_metadata"/>
   </node>
 
   <!-- Run TF broadcaster -->
@@ -19,4 +25,7 @@
     <rosparam file="$(find laelaps_2dnav)/params/base_local_planner_params.yaml" command="load" />
     <param name="controller_frequency" value="10.0" />
   </node>
+  
+  <!-- Launch RVIZ -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find laelaps_2dnav)/launch/laelaps_2dnav.rviz"/>
 </launch>
