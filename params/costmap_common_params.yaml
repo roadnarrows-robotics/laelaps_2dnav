@@ -3,7 +3,8 @@ raytrace_range: 3.0
 footprint: [[-0.175, 0.125], [0.175, 0.125], [0.175, -0.125], [-0.175, -0.125]]
 inflation_radius: 5.0
 
-observation_sources: laser_scan_sensor
+observation_sources: pointcloud_scan_sensor laser_scan_sensor
 
-laser_scan_sensor: {sensor_frame: laser_0, data_type: LaserScan, topic: /scan, marking: true, clearing: true}
+pointcloud_scan_sensor: {sensor_frame: base_footprint, data_type: LaserScan, topic: /scan, marking: true, clearing: false}
 
+laser_scan_sensor: {sensor_frame: laser_0, data_type: LaserScan, topic: /scan, marking: true, clearing: false}

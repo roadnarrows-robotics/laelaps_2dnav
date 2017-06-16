@@ -13,6 +13,16 @@
   <!-- Run TF broadcaster -->
   <node name="tf_broadcaster" pkg="robot_setup_tf" type="tf_broadcaster"/>
 
+  <!-- Start Pointcloud to Laser node -->
+  <node name="pointcloud_to_laserscan_node" pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node">
+    <remap from="scan" to="scan_from_pointcloud"/>
+    <param name="use_inf" type="boolean" value="false"/>
+    <param name="target_frame" type="str" value="laser_0" /> 
+  </node>
+
+  <!-- Start pointcloud publisher for testing only -->
+  <node name="pub_pcl" pkg="laelaps_2dnav" type="pcl_publisher"/>
+
   <!-- Run AMCL -->
   <!-- <include file="$(find amcl)/examples/amcl_diff.launch" /> -->
 
