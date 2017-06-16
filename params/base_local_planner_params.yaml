@@ -15,7 +15,7 @@ TrajectoryPlannerROS:
 
 
   holonomic_robot: false
-  dwa: true
+  dwa: false
   publish_cost_grid_pc: true
 
   meter_scoring: true
