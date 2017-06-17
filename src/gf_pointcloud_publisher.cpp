@@ -46,7 +46,7 @@ int main(int argc, char** argv){
         catch(tf::TransformException ex){
           ROS_ERROR("Received exception trying to transform point from map to base_footprint: %s", ex.what());
         }
-
+        pOut->header.stamp = ros::Time::now().toNSec()/1000.0;
         pub.publish(pOut);
         ros::spinOnce();
         loop_rate.sleep();
