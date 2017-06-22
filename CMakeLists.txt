@@ -137,6 +137,7 @@ include_directories(
 # add_executable(${PROJECT_NAME}_node src/laelaps_2dnav_node.cpp)
   add_executable(fc_publisher src/gf_FC_publisher.cpp)
   add_executable(pcl_publisher src/gf_pointcloud_publisher.cpp)
+  add_executable(laelaps_tf_broadcaster src/laelaps_tf_broadcaster.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -155,6 +156,7 @@ include_directories(
 # )
   target_link_libraries(fc_publisher ${catkin_LIBRARIES})
   target_link_libraries(pcl_publisher ${catkin_LIBRARIES})
+  target_link_libraries(laelaps_tf_broadcaster ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
