@@ -252,8 +252,9 @@ def printInput():
 ##
 def transform(x, y, affine):
   augvec = np.matrix([[x], [y], [1.0]])
-  t = affine * augvec
-  return t.item(0, 0), t.item(1, 0)
+  for a in affine:
+    augvec = a * augvec
+  return augvec.item(0, 0), augvec.item(1, 0)
 
 ##
 def processPath():
@@ -266,10 +267,31 @@ def processPath():
   translate = Input['translate']
   geopath = []
 
-  affine = np.matrix([
-      [scale * m.cos(rotate), m.sin(rotate), translate[0]],
-      [-m.sin(rotate), scale * m.cos(rotate), translate[1]],
-      [0.0, 0.0, 1.0]])
+  # affine composing transformation matrices
+  affine = []
+
+  # rotate
+  affine.append( np.matrix([
+        [m.cos(rotate),  m.sin(rotate), 0],
+        [-m.sin(rotate), m.cos(rotate), 0],
+        [0.0, 0.0, 1.0]]) )
+
+  # scale
+  affine.append( np.matrix([
+      [scale, 0.0, 0.0],
+      [0.0, scale, 0.0],
+      [0.0, 0.0, 1.0]]) )
+
+  # translate
+  affine.append( np.matrix([
+      [1.0, 0.0, translate[0]],
+      [0.0, 1.0, translate[1]],
+      [0.0, 0.0, 1.0]]) )
+
+  #affine = np.matrix([
+  #    [scale * m.cos(rotate), scale * m.sin(rotate), translate[0]],
+  #    [scale * -m.sin(rotate), scale * m.cos(rotate), translate[1]],
+  #    [0.0, 0.0, 1.0]])
 
   print "Transformed: "
 
