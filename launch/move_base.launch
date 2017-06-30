@@ -1,13 +1,16 @@
 <launch>
+  <arg name="gf_class_idx" default="168" />
+  <arg name="geofrenzy_fence_filename"
+        default="$(find laelaps_2dnav)/samplefences/shape_fences.json" />
 
   <!-- Start Geofrenzy Node -->
-  <node name="gf_server_168" pkg="geofrenzy" type="gf_server" args="_gf_class_index:=168"/>
-  <param name="gf_server_168/geofrenzy_fence_filename" type="str" value="/home/woundzoom/catkin_ws/src/laelaps_2dnav/samplefences/shape_fences.json" />
+  <node name="gf_server_$(arg gf_class_idx)" pkg="geofrenzy" type="gf_server" args="_gf_class_idx:=$(arg gf_class_idx)"/>
+  <param name="gf_server_$(arg gf_class_idx)/geofrenzy_fence_filename" type="str" value="$(arg geofrenzy_fence_filename)" />
 
   <!-- Start Geofrenzy Map Server -->
-  <node name="gf_map_server_168" pkg="geofrenzy" type="gf_map_server" args="_gf_class_index:=168">
-    <remap from="gf_map_server_168/geofrenzy/map" to="/map"/>
-    <remap from="gf_map_server_168/geofrenzy/map_metadata" to="/map_metadata"/>
+  <node name="gf_map_server_$(arg gf_class_idx)" pkg="geofrenzy" type="gf_map_server" args="_gf_class_idx:=$(arg gf_class_idx)">
+    <remap from="gf_map_server_$(arg gf_class_idx)/geofrenzy/map" to="/map"/>
+    <remap from="gf_map_server_$(arg gf_class_idx)/geofrenzy/map_metadata" to="/map_metadata"/>
   </node>
 
   <!-- Run TF broadcaster -->
@@ -26,8 +29,8 @@
   <!--<node name="pub_pcl" pkg="laelaps_2dnav" type="pcl_publisher"/>-->
 
   <!-- Start VCloud sensor node -->
-  <node name="gf_vcloud_168" pkg="geofrenzy" type="gf_vcloud" args="_gf_class_idx:=168">
-    <remap from="gf_vcloud_168/geofrenzy/cloud" to="/cloud_in"/>
+  <node name="gf_vcloud_$(arg gf_class_idx)" pkg="geofrenzy" type="gf_vcloud" args="_gf_class_idx:=$(arg gf_class_idx)">
+    <remap from="gf_vcloud_$(arg gf_class_idx)/geofrenzy/cloud" to="/cloud_in"/>
     <param name="geofrenzy_cloud_hfov_min" type="double" value="-3.14159" /> 
     <param name="geofrenzy_cloud_hfov_max" type="double" value="3.14159" /> 
   </node>
