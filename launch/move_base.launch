@@ -35,6 +35,9 @@
     <param name="geofrenzy_cloud_hfov_max" type="double" value="3.14159" /> 
   </node>
 
+  <!-- Start Sensor Relay Node -->
+  <node name="gf_sensor_relay" pkg="geofrenzy" type="gf_sensor_relay"/>
+
   <!-- Run AMCL -->
   <!-- <include file="$(find amcl)/examples/amcl_diff.launch" /> -->
 
