@@ -18,6 +18,10 @@
               "color_green":5,
               "color_blue":255,
               "color_alpha":255
+            },
+            { "ent_idx":209,
+              "ent_base":"boolset",
+              "bitset_num":0
             }
           ]
         },
