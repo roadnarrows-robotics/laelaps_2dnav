@@ -36,7 +36,10 @@
   </node>
 
   <!-- Start Sensor Relay Node -->
-  <node name="gf_sensor_relay" pkg="geofrenzy" type="gf_sensor_relay"/>
+  <node name="gf_sensor_relay" pkg="geofrenzy" type="gf_sensor_relay">
+    <remap from="gf_sensor_relay/camera_in/image_raw"
+      to="/laelaps/laelaps_camera/image_raw"/>
+  </node>
 
   <!-- Run AMCL -->
   <!-- <include file="$(find amcl)/examples/amcl_diff.launch" /> -->
